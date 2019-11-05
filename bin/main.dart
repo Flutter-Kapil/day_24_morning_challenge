@@ -30,39 +30,33 @@ bool isPandigital(int x) {
 //    [{ x: 3, y: 2 }, { x: 5, y: 7 }]
 //  ) ➞ 6
 int overlappingRectangles(List<Map> recA, List<Map> recB) {
-  //lets find coordinates for recA, lets say cord 1 and 3 are given
-  // we have to find cord 2 and 4 now
-  int cordAaX = recA[0]['x'];//ax1
-  int cordAaY = recA[0]['y'];//ay1
-  int cordAcX = recA[1]['x'];//ax2
-  int cordAcY = recA[1]['y'];//ay2
-  //we have  a(cordAaX,cordAaY) c(cordAcX,cordAcY)
-  //now lets get coordinates of b and d
-  int cordAbX = recA[1]['x'];//bx1
-  int cordAbY = recA[0]['y'];//by1
-  int cordAdX = recA[0]['x'];//bx2
-  int cordAdY = recA[1]['y'];//by2
-  print('a($cordAaX,$cordAaY),b($cordAbX,$cordAbY) ,c($cordAcX,$cordAcY), d($cordAdX,$cordAdY)');// print all coordinates of rectangle A
-
-
-  //lets calculate coordinates of recB now
-  int cordBaX = recB[0]['x'];
-  int cordBaY = recB[0]['y'];
-  int cordBcX = recB[1]['x'];
-  int cordBcY = recB[1]['y'];
-  //we have  a(cordBaX,cordBaY) c(cordBcX,cordBcY)
-  //now lets get coordinates of b and d
-  int cordBbX = recB[1]['x'];
-  int cordBbY = recB[0]['y'];
-  int cordBdX = recB[0]['x'];
-  int cordBdY = recB[1]['y'];
-  print('a($cordBaX,$cordBaY),b($cordBbX,$cordBbY) ,c($cordBcX,$cordBcY), d($cordBdX,$cordBdY)');// print all coordinates of rectangle B
-
-
   //lets first  check whether two rectangles overlap or not
   // for this we can check if the line from of rec A x coordinates overlap with line from recB x coordinates, it should also do the same for Y axis.
-  if(rectangleOverLapsOrNot(List<Map> recA, List<Map> recB)){
+  if(rectangleOverLapsOrNot( recA, recB)){
     //if recA and recB overlap then calculate their intersection area and return that
+    //now lets check which x point of recA and which y point of  recAis overlapping with recB.
+    //this way we will know which two points are of common rectangle between them. then we can just find the area of rectangle from those two points.
+    //lets call then point A and point B of this new rectangle
+    List pointA = [];//[x,y]
+    List pointB =[];//[x,y]
+    if((recA[1]['x']<=recB[1]['x'] && recA[1]['x']>=recB[0]['x'] )){
+      pointA.add(recA[1]['x']);
+    }else
+    if((recA[0]['x']<=recB[1]['x'] && recA[0]['x']>=recB[0]['x'])){
+      pointA.add(recA[0]['x']);
+    }
+    //above two if statements will add x coordinate for point A
+    //now lets add y coordinate of point A
+    if(recA[1]['y']<=recB[1]['y'] && recA[1]['y']>=recB[0]['y'] ){
+      pointA.add(recA[1]['y']);
+    }else
+    if(recA[0]['y']<=recB[1]['y'] && recA[0]['y']>=recB[0]['y']){
+      pointA.add(recA[0]['y']);
+    }
+    print('pointA is $pointA');
+
+    //now lets find coordinates for pointB
+
   }
   else{
     //if recA and recB don't overlap then return null
