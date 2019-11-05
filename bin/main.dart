@@ -53,7 +53,7 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     if(recA[0]['y']<=recB[1]['y'] && recA[0]['y']>=recB[0]['y']){
       pointA.add(recA[0]['y']);
     }
-    print('pointA is $pointA');
+//    print('pointA is $pointA');
 
     //now lets find coordinates for pointB
     if((recB[0]['x']<=recA[1]['x'] && recB[0]['x']>=recA[0]['x'])){
@@ -71,7 +71,7 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     if(recB[0]['y']<=recA[1]['y'] && recB[0]['y']>=recA[0]['y']){
       pointB.add(recB[0]['y']);
     }
-    print('pointB is $pointB');
+//    print('pointB is $pointB');
 
     //now return product of the difference of x and y coordinate of pointA and point Y
     return (pointA[0]-pointB[0])*(pointA[1]-pointB[1]);
@@ -80,19 +80,18 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     //if recA and recB don't overlap then return null
     return null;
   }
-  return 0;
 }
 
 bool xAxisOverlapsOrNot(List<Map> recA, List<Map> recB){
 if((recA[1]['x']<=recB[1]['x'] && recA[1]['x']>=recB[0]['x'] )||(recA[0]['x']<=recB[1]['x'] && recA[0]['x']>=recB[0]['x'])){
- print('x axis overlaps');
+// print('x axis overlaps');
  return true;}
 
   return false;
 }
 bool yAxisOverlapsOrNot(List<Map> recA, List<Map> recB){
   if((recA[1]['y']<=recB[1]['y'] && recA[1]['y']>=recB[0]['y'] )||(recA[0]['y']<=recB[1]['y'] && recA[0]['y']>=recB[0]['y'])){
-    print('y axis overlaps');
+//    print('y axis overlaps');
     return true;}
 
   return false;
