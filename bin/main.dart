@@ -56,14 +56,13 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     print('pointA is $pointA');
 
     //now lets find coordinates for pointB
+    if((recB[0]['x']<=recA[1]['x'] && recB[0]['x']>=recA[0]['x'])){
+      pointB.add(recB[0]['x']);
+    }else
     if((recB[1]['x']<=recA[1]['x'] && recB[1]['x']>=recA[0]['x'] )){
       print('is ${recB[1]['x']}<=${recA[1]['x']}  ');
       pointB.add(recB[1]['x']);
-    }else
-    if((recB[0]['x']<=recA[1]['x'] && recB[0]['x']>=recA[0]['x'])){
-      pointB.add(recB[0]['x']);
     }
-    print('pointB is $pointB');
     //above two if statements will add x coordinate for point B
     //now lets add y coordinate of point B
     if(recB[1]['y']<=recA[1]['y'] && recB[1]['y']>=recA[0]['y'] ){
