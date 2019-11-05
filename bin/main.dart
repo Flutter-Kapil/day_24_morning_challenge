@@ -72,6 +72,9 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
       pointB.add(recB[0]['y']);
     }
     print('pointB is $pointB');
+
+    //now return product of the difference of x and y coordinate of pointA and point Y
+    return (pointA[0]-pointB[0])*(pointA[1]-pointB[1]);
   }
   else{
     //if recA and recB don't overlap then return null
