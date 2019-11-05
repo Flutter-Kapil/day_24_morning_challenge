@@ -57,9 +57,37 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
   int cordBdX = recB[0]['x'];
   int cordBdY = recB[1]['y'];
   print('a($cordBaX,$cordBaY),b($cordBbX,$cordBbY) ,c($cordBcX,$cordBcY), d($cordBdX,$cordBdY)');// print all coordinates of rectangle B
+
+
+  //lets first  check whether two rectangles overlap or not
+  // for this we can check if the line from of rec A x coordinates overlap with line from recB x coordinates, it should also do the same for Y axis.
   return 0;
+}
+
+bool xAxisOverlapsOrNot(int Ax1, int Ax2,  int Bx1,  int Bx2, ){
+    if((Ax2>=Bx2 && Ax2<=Bx2) || (Ax1>=Bx2 && Ax1<=Bx2)){
+      print('x axis overlapts');
+      return true;
+    }
+  return false;
+}
+bool yAxisOverlapsOrNot(int Ay1, int Ay2,  int By1,  int By2, ){
+  if((Ay2>=By1 && Ay2<=By2) || (Ay1>=By1 && Ay1<=By2)){
+    print('y axis overlapts');
+    return true;
+  }
+  return false;
+}
+bool rectangleOverLapsOrNot(int Ax1,int Ay1, int Ax2, int Ay2, int Bx1, int By1,  int Bx2, int By2, ){
+  if(xAxisOverlapsOrNot(Ax1, Ax2,  Bx1,  Bx2 ) && yAxisOverlapsOrNot(Ay1, Ay2, By1, By2 )){
+    return true;
+  }else{
+    return false;
+  }
+
 }
 main() {
   print(isPandigital(0123456789));
   print(overlappingRectangles([{ 'x': 2, 'y': 1 }, { 'x': 5, 'y': 5 }], [{ 'x': 3, 'y': 2 }, { 'x': 5, 'y': 7 }]));
+  print(rectangleOverLapsOrNot(2,1,4,5,3,2,5,7));
 }
