@@ -65,7 +65,7 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
 }
 
 bool xAxisOverlapsOrNot(int Ax1, int Ax2,  int Bx1,  int Bx2, ){
-    if((Ax2>=Bx2 && Ax2<=Bx2) || (Ax1>=Bx2 && Ax1<=Bx2)){
+    if((Ax2<=Bx2 && Ax2>=Bx1) || (Ax1<=Bx2 && Ax1>=Bx1)){
       print('x axis overlapts');
       return true;
     }
@@ -89,5 +89,5 @@ bool rectangleOverLapsOrNot(int Ax1,int Ay1, int Ax2, int Ay2, int Bx1, int By1,
 main() {
   print(isPandigital(0123456789));
   print(overlappingRectangles([{ 'x': 2, 'y': 1 }, { 'x': 5, 'y': 5 }], [{ 'x': 3, 'y': 2 }, { 'x': 5, 'y': 7 }]));
-  print(rectangleOverLapsOrNot(2,1,4,5,3,2,5,7));
+  print(rectangleOverLapsOrNot(2,1,4,5,3,2,5,6));
 }
