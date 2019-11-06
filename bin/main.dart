@@ -30,6 +30,7 @@ bool isPandigital(int x) {
 //    [{ x: 3, y: 2 }, { x: 5, y: 7 }]
 //  ) ➞ 6
 int overlappingRectangles(List<Map> recA, List<Map> recB) {
+  //if all numbers are negative then turn them turn them into positive(abs)
   //lets first  check whether two rectangles overlap or not
   // for this we can check if the line from of rec A x coordinates overlap with line from recB x coordinates, it should also do the same for Y axis.
   if (rectangleOverLapsOrNot(recA, recB)) {
@@ -39,19 +40,19 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     //lets call then point A and point B of this new rectangle
     List pointA = []; //[x,y]
     List pointB = []; //[x,y]
-    if ((recA[1]['x'] <= recB[1]['x'] && recA[1]['x'] >= recB[0]['x'])) {
+    if ((recA[1]['x'] < recB[1]['x'] && recA[1]['x'] > recB[0]['x'])) {
       pointA.add(recA[1]['x']);
-    } else if ((recA[0]['x'] <= recB[1]['x'] && recA[0]['x'] >= recB[0]['x'])) {
+    } else if ((recA[0]['x'] < recB[1]['x'] && recA[0]['x'] > recB[0]['x'])) {
       pointA.add(recA[0]['x']);
     }
     //above two if statements will add x coordinate for point A
     //now lets add y coordinate of point A
-    if (recA[1]['y'] <= recB[1]['y'] && recA[1]['y'] >= recB[0]['y']) {
+    if (recA[1]['y'] < recB[1]['y'] && recA[1]['y'] > recB[0]['y']) {
       pointA.add(recA[1]['y']);
-    } else if (recA[0]['y'] <= recB[1]['y'] && recA[0]['y'] >= recB[0]['y']) {
+    } else if (recA[0]['y'] < recB[1]['y'] && recA[0]['y'] > recB[0]['y']) {
       pointA.add(recA[0]['y']);
     }
-//    print('pointA is $pointA');
+    print('pointA is $pointA');
 
     //now lets find coordinates for pointB
     if ((recB[0]['x'] <= recA[1]['x'] && recB[0]['x'] >= recA[0]['x'])) {
@@ -67,7 +68,7 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     } else if (recB[0]['y'] <= recA[1]['y'] && recB[0]['y'] >= recA[0]['y']) {
       pointB.add(recB[0]['y']);
     }
-//    print('pointB is $pointB');
+    print('pointB is $pointB');
 
     //now return product of the difference of x and y coordinate of pointA and point Y
     return (pointA[0] - pointB[0]) * (pointA[1] - pointB[1]);
@@ -78,9 +79,9 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
 }
 
 bool xAxisOverlapsOrNot(List<Map> recA, List<Map> recB) {
-  if ((recA[1]['x'] <= recB[1]['x'] && recA[1]['x'] >= recB[0]['x']) ||
-      (recA[0]['x'] <= recB[1]['x'] && recA[0]['x'] >= recB[0]['x'])) {
-// print('x axis overlaps');
+  if ((recA[1]['x'] < recB[1]['x'] && recA[1]['x'] > recB[0]['x']) ||
+      (recA[0]['x'] < recB[1]['x'] && recA[0]['x'] > recB[0]['x'])) {
+    print('x axis overlaps');
     return true;
   }
 
@@ -88,9 +89,9 @@ bool xAxisOverlapsOrNot(List<Map> recA, List<Map> recB) {
 }
 
 bool yAxisOverlapsOrNot(List<Map> recA, List<Map> recB) {
-  if ((recA[1]['y'] <= recB[1]['y'] && recA[1]['y'] >= recB[0]['y']) ||
-      (recA[0]['y'] <= recB[1]['y'] && recA[0]['y'] >= recB[0]['y'])) {
-//    print('y axis overlaps');
+  if ((recA[1]['y'] < recB[1]['y'] && recA[1]['y'] > recB[0]['y']) ||
+      (recA[0]['y'] < recB[1]['y'] && recA[0]['y'] > recB[0]['y'])) {
+    print('y axis overlaps');
     return true;
   }
 
@@ -106,24 +107,25 @@ bool rectangleOverLapsOrNot(List<Map> recA, List<Map> recB) {
 }
 
 main() {
-  print(isPandigital(0123456789));
-  print(overlappingRectangles([
+//  print(isPandigital(0123456789));
+//  print(overlappingRectangles([
+//    {'x': -1, 'y': -1},
+//    {'x': 1, 'y': 1}
+//  ], [
+//    {'x': 0, 'y': 0},
+//    {'x': 5, 'y': 7}
+//  ]));
+
+  print(rectangleOverLapsOrNot([
     {'x': -1, 'y': -1},
     {'x': 1, 'y': 1}
   ], [
-    {'x': 0, 'y': 0},
+    {'x': -1, 'y': 0},
     {'x': 5, 'y': 7}
   ]));
   print(overlappingRectangles([
-    {'x': -1, 'y': -1},
-    {'x': -3, 'y': -4}
-  ], [
-    {'x': -2, 'y': -3},
-    {'x': -5, 'y': -7}
-  ]));
-  print(rectangleOverLapsOrNot([
-    {'x': -5, 'y': -5},
-    {'x': -1, 'y': -1}
+    {'x': 2, 'y': 1},
+    {'x': 5, 'y': 5}
   ], [
     {'x': 3, 'y': 2},
     {'x': 5, 'y': 7}
