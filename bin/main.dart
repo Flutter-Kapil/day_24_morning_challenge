@@ -7,6 +7,7 @@
 // that takes an integer, returning true if the integer is pandigital, and false otherwise.
 //  Examples
 //  isPandigital(98140723568910) ➞ true
+
 bool isPandigital(int x) {
   String xToString = x.toString();
   for (int j = 0; j < 10; j++) {
@@ -30,24 +31,11 @@ bool isPandigital(int x) {
 //    [{ x: 3, y: 2 }, { x: 5, y: 7 }]
 //  ) ➞ 6
 int overlappingRectangles(List<Map> recA, List<Map> recB) {
-  //if all numbers are negative then turn them turn them into positive(abs)
-
-  if (recA[0]['x'] < 0 &&
-      recA[0]['y'] < 0 &&
-      recA[1]['x'] < 0 &&
-      recA[1]['y'] < 0 &&
-      recB[0]['x'] < 0 &&
-      recB[0]['y'] < 0 &&
-      recB[1]['x'] < 0 &&
-      recB[1]['y'] < 0) {
-    recA[0]['x'] = recA[0]['x'].abs();
-    recA[0]['y'] = recA[0]['y'].abs();
-    recA[1]['x'] = recA[1]['x'].abs();
-    recA[1]['y'] = recA[1]['y'].abs();
-    recB[0]['x'] = recB[0]['x'].abs();
-    recB[0]['y'] = recB[0]['y'].abs();
-    recB[1]['x'] = recB[1]['x'].abs();
-    recB[1]['y'] = recB[1]['y'].abs();
+  //if all numbers are negative then turn them  into positive(abs)
+  if ((recA.every((Map map) => map.values.every((x) => x < 0))) &&
+      (recB.every((Map map) => map.values.every((x) => x < 0)))) {
+    recA.forEach((map) => map.forEach((k, v) => map[k] = v.abs()));
+    recB.forEach((map) => map.forEach((k, v) => map[k] = v.abs()));
   }
   //lets first  check whether two rectangles overlap or not
   // for this we can check if the line from of rec A x coordinates overlap with line from recB x coordinates, it should also do the same for Y axis.
@@ -96,32 +84,15 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
   }
 }
 
-bool xAxisOverlapsOrNot(List<Map> recA, List<Map> recB) {
-  if ((recA[1]['x'] <= recB[1]['x'] && recA[1]['x'] >= recB[0]['x']) ||
-      (recA[0]['x'] <= recB[1]['x'] && recA[0]['x'] >= recB[0]['x'])) {
-    print('x axis overlaps');
-    return true;
-  }
+bool xAxisOverlapsOrNot(List<Map> recA, List<Map> recB) =>
+    (recA[1]['x'] <= recB[1]['x'] && recA[1]['x'] >= recB[0]['x']) ||
+    (recA[0]['x'] <= recB[1]['x'] && recA[0]['x'] >= recB[0]['x']);
 
-  return false;
-}
+bool yAxisOverlapsOrNot(List<Map> recA, List<Map> recB) =>
+    (recA[1]['y'] <= recB[1]['y'] && recA[1]['y'] >= recB[0]['y']) ||
+    (recA[0]['y'] <= recB[1]['y'] && recA[0]['y'] >= recB[0]['y']);
 
-bool yAxisOverlapsOrNot(List<Map> recA, List<Map> recB) {
-  if ((recA[1]['y'] <= recB[1]['y'] && recA[1]['y'] >= recB[0]['y']) ||
-      (recA[0]['y'] <= recB[1]['y'] && recA[0]['y'] >= recB[0]['y'])) {
-    print('y axis overlaps');
-    return true;
-  }
-
-  return false;
-}
-
-bool rectangleOverLapsOrNot(List<Map> recA, List<Map> recB) {
-  if (xAxisOverlapsOrNot(recA, recB) && yAxisOverlapsOrNot(recA, recB)) {
-    return true;
-  } else {
-    return false;
-  }
-}
+bool rectangleOverLapsOrNot(List<Map> recA, List<Map> recB) =>
+    xAxisOverlapsOrNot(recA, recB) && yAxisOverlapsOrNot(recA, recB);
 
 main() {}
