@@ -74,4 +74,12 @@ bool yAxisOverlapsOrNot(List<Map> recA, List<Map> recB) =>
 bool rectangleOverLapsOrNot(List<Map> recA, List<Map> recB) =>
     xAxisOverlapsOrNot(recA, recB) && yAxisOverlapsOrNot(recA, recB);
 
-main() {}
+main() {
+  overlappingRectangles([
+    {'x': -1, 'y': -1},
+    {'x': -3, 'y': -4}
+  ], [
+    {'x': -2, 'y': -3},
+    {'x': -5, 'y': -7}
+  ]);
+}
