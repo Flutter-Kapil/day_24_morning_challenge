@@ -42,31 +42,20 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
   if (rectangleOverLapsOrNot(recA, recB)) {
     List pointA = []; //[x,y]
     List pointB = []; //[x,y]
-    if ((recA[1]['x'] <= recB[1]['x'] && recA[1]['x'] >= recB[0]['x'])) {
-      pointA.add(recA[1]['x']);
-    } else if ((recA[0]['x'] <= recB[1]['x'] && recA[0]['x'] >= recB[0]['x'])) {
-      pointA.add(recA[0]['x']);
-    }
-
-    if (recA[1]['y'] <= recB[1]['y'] && recA[1]['y'] >= recB[0]['y']) {
-      pointA.add(recA[1]['y']);
-    } else if (recA[0]['y'] <= recB[1]['y'] && recA[0]['y'] >= recB[0]['y']) {
-      pointA.add(recA[0]['y']);
-    }
+    (recB[0]['x'] >= recA[0]['x'] && recB[0]['x'] <= recA[1]['x'])
+        ? pointA.add(recB[0]['x'])
+        : pointA.add(recB[1]['x']);
+    (recB[0]['y'] >= recA[0]['y'] && recB[0]['y'] <= recA[1]['y'])
+        ? pointA.add(recB[0]['y'])
+        : pointA.add(recB[1]['y']);
     print('pointA is $pointA');
-
-    if ((recB[0]['x'] <= recA[1]['x'] && recB[0]['x'] >= recA[0]['x'])) {
-      pointB.add(recB[0]['x']);
-    } else if ((recB[1]['x'] <= recA[1]['x'] && recB[1]['x'] >= recA[0]['x'])) {
-      print('is ${recB[1]['x']}<=${recA[1]['x']}  ');
-      pointB.add(recB[1]['x']);
-    }
-
-    if (recB[1]['y'] <= recA[1]['y'] && recB[1]['y'] >= recA[0]['y']) {
-      pointB.add(recB[1]['y']);
-    } else if (recB[0]['y'] <= recA[1]['y'] && recB[0]['y'] >= recA[0]['y']) {
-      pointB.add(recB[0]['y']);
-    }
+    //point B calculation now
+    (recA[0]['x'] >= recB[0]['x'] && recA[0]['x'] <= recB[1]['x'])
+        ? pointB.add(recA[0]['x'])
+        : pointB.add(recA[1]['x']);
+    (recA[0]['y'] >= recB[0]['y'] && recA[0]['y'] <= recB[1]['y'])
+        ? pointB.add(recA[0]['y'])
+        : pointB.add(recA[1]['y']);
     print('pointB is $pointB');
     return (pointA[0] - pointB[0]) * (pointA[1] - pointB[1]);
   } else {
