@@ -40,6 +40,10 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
   //lets first  check whether two rectangles overlap or not
   // for this we can check if the line from of rec A x coordinates overlap with line from recB x coordinates, it should also do the same for Y axis.
   if (rectangleOverLapsOrNot(recA, recB)) {
+    //if recA and recB overlap then calculate their intersection area and return that
+    //now lets check which x point of recA and which y point of  recAis overlapping with recB.
+    //this way we will know which two points are of common rectangle between them. then we can just find the area of rectangle from those two points.
+    //lets call then point A and point B of this new rectangle
     List pointA = []; //[x,y]
     List pointB = []; //[x,y]
     if ((recA[1]['x'] <= recB[1]['x'] && recA[1]['x'] >= recB[0]['x'])) {
@@ -47,7 +51,8 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     } else if ((recA[0]['x'] <= recB[1]['x'] && recA[0]['x'] >= recB[0]['x'])) {
       pointA.add(recA[0]['x']);
     }
-
+    //above two if statements will add x coordinate for point A
+    //now lets add y coordinate of point A
     if (recA[1]['y'] <= recB[1]['y'] && recA[1]['y'] >= recB[0]['y']) {
       pointA.add(recA[1]['y']);
     } else if (recA[0]['y'] <= recB[1]['y'] && recA[0]['y'] >= recB[0]['y']) {
@@ -55,21 +60,26 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
     }
     print('pointA is $pointA');
 
+    //now lets find coordinates for pointB
     if ((recB[0]['x'] <= recA[1]['x'] && recB[0]['x'] >= recA[0]['x'])) {
       pointB.add(recB[0]['x']);
     } else if ((recB[1]['x'] <= recA[1]['x'] && recB[1]['x'] >= recA[0]['x'])) {
       print('is ${recB[1]['x']}<=${recA[1]['x']}  ');
       pointB.add(recB[1]['x']);
     }
-
+    //above two if statements will add x coordinate for point B
+    //now lets add y coordinate of point B
     if (recB[1]['y'] <= recA[1]['y'] && recB[1]['y'] >= recA[0]['y']) {
       pointB.add(recB[1]['y']);
     } else if (recB[0]['y'] <= recA[1]['y'] && recB[0]['y'] >= recA[0]['y']) {
       pointB.add(recB[0]['y']);
     }
     print('pointB is $pointB');
+
+    //now return product of the difference of x and y coordinate of pointA and point Y
     return (pointA[0] - pointB[0]) * (pointA[1] - pointB[1]);
   } else {
+    //if recA and recB don't overlap then return null
     return null;
   }
 }
