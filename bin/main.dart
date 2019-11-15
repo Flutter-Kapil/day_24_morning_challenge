@@ -40,25 +40,14 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
   //lets first  check whether two rectangles overlap or not
   // for this we can check if the line from of rec A x coordinates overlap with line from recB x coordinates, it should also do the same for Y axis.
   if (rectangleOverLapsOrNot(recA, recB)) {
-    //if recA and recB overlap then calculate their intersection area and return that
-    //now lets check which x point of recA and which y point of  recAis overlapping with recB.
-    //this way we will know which two points are of common rectangle between them. then we can just find the area of rectangle from those two points.
-    //lets call then point A and point B of this new rectangle
     List pointA = [
       somefunction(recA[0]['x'], recA[1]['x'], recB[0]['x'], recB[1]['x']),
       somefunction(recA[0]['y'], recA[1]['y'], recB[0]['y'], recB[1]['y'])
     ]; //[x,y]
-    print(pointA);
-    List pointB = []; //[x,y]
-    recA[1]['x'] >= recB[0]['x']
-        ? pointB.add(recA[1]['x'])
-        : pointB.add(recA[0]['x']);
-    recA[1]['y'] > recB[0]['y']
-        ? pointB.add(recA[1]['y'])
-        : pointB.add(recA[0]['y']);
-    print('pointB is $pointB');
-
-    //now return product of the difference of x and y coordinate of pointA and point Y
+    List pointB = [
+      anotherfunction(recA[0]['x'], recA[1]['x'], recB[0]['x'], recB[1]['x']),
+      anotherfunction(recA[0]['y'], recA[1]['y'], recB[0]['y'], recB[1]['y'])
+    ];
     return (pointA[0] - pointB[0]) * (pointA[1] - pointB[1]);
   } else {
     //if recA and recB don't overlap then return null
@@ -67,6 +56,7 @@ int overlappingRectangles(List<Map> recA, List<Map> recB) {
 }
 
 int somefunction(int a, int b, int c, int d) => c >= a ? c : d;
+int anotherfunction(int a, int b, int c, int d) => b >= c ? b : a;
 
 bool xAxisOverlapsOrNot(List<Map> recA, List<Map> recB) =>
     (recA[1]['x'] <= recB[1]['x'] && recA[1]['x'] >= recB[0]['x']) ||
